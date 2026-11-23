@@ -1,5 +1,6 @@
-<h1>Kelompok 8 - Pemrograman Mobile</h1>
-<h3>Anggota Kelompok</h3>
-<p>1. D121241008 - Dita Ayodya Al Mira - @Almiradyaa</p> 
-<p>2. D121241038 - Annisa Latifa Alquraini</p>
-<p>3. D121241044 - Heniel Putri Tangko Ramba Padang</p>
+# Split Bill App — Kelompok 7 (Kelas B)
+
+## Anggota Kelompok
+1. **Annisa Latifa Alquraini** — D121241038 — `@alquraini` (UI & Screens)
+2. **Dita Ayodya Al Mira** — D121241008 — `@Almiradyaa` (Logic, State & Routing)
+3. **Heniel Putri Tangko Ramba Padang** — D121241044 — `@HenielPutri5` (Models & Backend/Services)
