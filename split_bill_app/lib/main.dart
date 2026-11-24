@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_routes.dart';
 import 'providers/auth_provider.dart';
@@ -9,7 +10,9 @@ import 'screens/create_bill_screen.dart';
 import 'screens/bill_detail_screen.dart';
 import 'screens/profile_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const SplitBillApp());
 }
 
