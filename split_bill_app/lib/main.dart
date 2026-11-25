@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'core/theme/app_theme.dart';
 import 'providers/app_routes.dart';
 import 'providers/auth_provider.dart';
 import 'providers/split_bill_provider.dart';
@@ -29,10 +30,9 @@ class SplitBillApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Split Bill App',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-          useMaterial3: true,
-        ),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
         initialRoute: AppRoutes.login,
         routes: {
           AppRoutes.login: (context) => const LoginScreen(),
