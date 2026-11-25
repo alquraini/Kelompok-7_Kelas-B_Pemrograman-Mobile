@@ -1,22 +1,25 @@
 import 'package:flutter/foundation.dart';
+import '../models/bill_model.dart';
+import '../models/participant_model.dart';
 
 class SplitBillProvider extends ChangeNotifier {
-  final List<Map<String, dynamic>> _bills = [];
-  bool _isLoading = false;
+  final List<BillModel> _bills = [];
+  final bool _isLoading = false;
   String? _errorMessage;
 
-  List<Map<String, dynamic>> get bills => List.unmodifiable(_bills);
+  List<BillModel> get bills => List.unmodifiable(_bills);
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  List<Map<String, dynamic>> get activeBills =>
-      _bills.where((bill) => bill['isSettled'] != true).toList();
+  /// Getter untuk filter Tab Beranda (SB-18)
+  List<BillModel> get activeBills =>
+      _bills.where((bill) => !bill.isLunas).toList();
 
-  List<Map<String, dynamic>> get settledBills =>
-      _bills.where((bill) => bill['isSettled'] == true).toList();
+  List<BillModel> get settledBills =>
+      _bills.where((bill) => bill.isLunas).toList();
 
-  /// SB-13 & SB-14: Perhitungan Bagi Rata + Pajak PPN & Service Proporsional
-  List<Map<String, dynamic>>? calculateEqualSplit({
+  /// SB-13 & SB-14: Perhitungan Bagi Rata + Pajak & Service Proporsional
+  List<ParticipantModel>? calculateEqualSplit({
     required double subtotal,
     required List<String> participantNames,
     double taxPercent = 0,
@@ -49,8 +52,8 @@ class SplitBillProvider extends ChangeNotifier {
     );
   }
 
-  /// SB-13 & SB-14: Perhitungan Custom per Peserta + Pajak PPN & Service Proporsional
-  List<Map<String, dynamic>>? calculateCustomSplit({
+  /// SB-13 & SB-14: Perhitungan Custom + Pajak & Service Proporsional
+  List<ParticipantModel>? calculateCustomSplit({
     required double subtotal,
     required Map<String, double> customAmounts,
     double taxPercent = 0,
@@ -81,7 +84,7 @@ class SplitBillProvider extends ChangeNotifier {
     // Toleransi selisih pembulatan desimal (0.01)
     if ((customSum - subtotal).abs() > 0.01) {
       _setError(
-        'Total nominal custom (Rp ${customSum.toStringAsFixed(0)}) harus sama dengan subtotal (Rp ${subtotal.toStringAsFixed(0)}).',
+        'Total nominal custom (Rp ${customSum.toStringAsFixed(0)}) harus sama dengan subtotal (Rp${subtotal.toStringAsFixed(0)}).',
       );
       return null;
     }
@@ -94,13 +97,14 @@ class SplitBillProvider extends ChangeNotifier {
     );
   }
 
-  /// Membuat dan menyimpan tagihan baru ke memori state
+  /// Menambahkan tagihan baru berbasis BillModel ke state
   bool createBill({
     required String title,
     required double subtotal,
-    required List<Map<String, dynamic>> participants,
+    required List<ParticipantModel> participants,
     double taxPercent = 0,
     double servicePercent = 0,
+    String userId = '',
   }) {
     if (title.trim().isEmpty) {
       _setError('Judul tagihan tidak boleh kosong.');
@@ -115,18 +119,19 @@ class SplitBillProvider extends ChangeNotifier {
     final totalService = subtotal * (servicePercent / 100);
     final grandTotal = subtotal + totalTax + totalService;
 
-    _bills.add({
-      'id': DateTime.now().millisecondsSinceEpoch.toString(),
-      'title': title.trim(),
-      'subtotal': subtotal,
-      'taxPercent': taxPercent,
-      'servicePercent': servicePercent,
-      'total': grandTotal,
-      'participants': participants,
-      'isSettled': false,
-      'createdAt': DateTime.now().toIso8601String(),
-    });
+    final newBill = BillModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      judul: title.trim(),
+      tanggal: DateTime.now(),
+      total: double.parse(grandTotal.toStringAsFixed(2)),
+      persentasePajak: taxPercent,
+      persentaseLayanan: servicePercent,
+      peserta: participants,
+      isLunas: participants.every((p) => p.isPaid),
+      userId: userId,
+    );
 
+    _bills.add(newBill);
     _errorMessage = null;
     notifyListeners();
     return true;
@@ -156,7 +161,7 @@ class SplitBillProvider extends ChangeNotifier {
   }
 
   /// Pembagian pajak (PPN) & biaya layanan secara proporsional sesuai porsi tagihan
-  List<Map<String, dynamic>> _applyProportionalTaxAndService({
+  List<ParticipantModel> _applyProportionalTaxAndService({
     required double subtotal,
     required Map<String, double> baseAmounts,
     required double taxPercent,
@@ -164,34 +169,11 @@ class SplitBillProvider extends ChangeNotifier {
   }) {
     final totalTax = subtotal * (taxPercent / 100);
     final totalService = subtotal * (servicePercent / 100);
+    int index = 0;
 
     final result = baseAmounts.entries.map((entry) {
+      index++;
       final ratio = entry.value / subtotal;
       final taxShare = totalTax * ratio;
       final serviceShare = totalService * ratio;
-      final finalAmount = entry.value + taxShare + serviceShare;
-
-      return {
-        'name': entry.key.trim(),
-        'baseAmount': entry.value,
-        'taxShare': taxShare,
-        'serviceShare': serviceShare,
-        'amount': double.parse(finalAmount.toStringAsFixed(2)),
-        'isPaid': false,
-      };
-    }).toList();
-
-    notifyListeners();
-    return result;
-  }
-
-  void _setError(String message) {
-    _errorMessage = message;
-    notifyListeners();
-  }
-
-  void clearError() {
-    _errorMessage = null;
-    notifyListeners();
-  }
-}
+      final finalAmount = entry.value + taxShare + service
