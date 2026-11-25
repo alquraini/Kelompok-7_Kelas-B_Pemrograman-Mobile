@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "788665107919",
+    "project_id": "split-bill-app-cfd21",
+    "storage_bucket": "split-bill-app-cfd21.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788665107919:android:d698d2a5e7d2290d1d7eba",
+        "android_client_info": {
+          "package_name": "com.example.split_bill_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcAn8xQI4nOVVI8FGT5s_pNnGBEqCOD0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

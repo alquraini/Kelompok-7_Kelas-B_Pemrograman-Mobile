@@ -3,9 +3,9 @@
 Repository utama untuk pengumpulan tugas mingguan dan pengembangan **Project Akhir** mata kuliah Pemrograman Mobile[cite: 4].
 
 ## Anggota Kelompok
-1. **Annisa Latifa Alquraini** — D121241038 — `@alquraini` (UI & Screens)[cite: 3, 4]
-2. **Dita Ayodya Al Mira** — D121241008 — `@Almiradyaa` (Logic, State & Routing)[cite: 3, 4]
-3. **Heniel Putri Tangko Ramba Padang** — D121241044 — `@HenielPutri5` (Models & Backend/Services)[cite: 3, 4]
+1. **Annisa Latifa Alquraini** — D121241038 — `@alquraini` (UI & Screens)
+2. **Dita Ayodya Al Mira** — D121241008 — `@Almiradyaa` (Logic, State & Routing)
+3. **Heniel Putri Tangko Ramba Padang** — D121241044 — `@HenielPutri5` (Models & Backend/Services)
 
 ---
 
