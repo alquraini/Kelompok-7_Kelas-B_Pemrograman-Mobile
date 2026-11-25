@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'providers/app_routes.dart';
 import 'providers/auth_provider.dart';
 import 'providers/split_bill_provider.dart';
+import 'services/notification_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/create_bill_screen.dart';
 import 'screens/bill_detail_screen.dart';
 import 'screens/profile_screen.dart';
 
-Future<void> main() async {
+void main() async {
+  // Pastikan binding Flutter siap untuk fungsi async
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  // Inisialisasi notifikasi lokal
+  await NotificationService.initNotification();
+
   runApp(const SplitBillApp());
 }
 

@@ -93,22 +93,21 @@ class AppTheme {
 
   static ThemeData _build(ColorScheme cs, SplitInColors extra) {
     final base = ThemeData(useMaterial3: true, colorScheme: cs);
-    final text = GoogleFonts.plusJakartaSansTextTheme(base.textTheme)
-        .apply(bodyColor: cs.onSurface, displayColor: cs.onSurface)
+        
+    TextStyle f(double size, [FontWeight w = FontWeight.w400]) =>
+    GoogleFonts.plusJakartaSans(fontSize: size, fontWeight: w);
+
+    final text = base.textTheme
         .copyWith(
-          headlineSmall: GoogleFonts.plusJakartaSans(
-              fontSize: 22, fontWeight: FontWeight.w700), // page title
-          headlineMedium: GoogleFonts.plusJakartaSans(
-              fontSize: 28, fontWeight: FontWeight.w700), // total nominal
-          titleMedium: GoogleFonts.plusJakartaSans(
-              fontSize: 16, fontWeight: FontWeight.w600), // section heading
-          titleSmall: GoogleFonts.plusJakartaSans(
-              fontSize: 15, fontWeight: FontWeight.w600), // card title
-          bodyMedium: GoogleFonts.plusJakartaSans(fontSize: 14),
-          bodySmall: GoogleFonts.plusJakartaSans(fontSize: 13),
-          labelSmall: GoogleFonts.plusJakartaSans(
-              fontSize: 12, fontWeight: FontWeight.w500), // badge, caption
-        );
+          headlineSmall: f(22, FontWeight.w700), // judul halaman
+          headlineMedium: f(28, FontWeight.w700), // total nominal
+          titleMedium: f(16, FontWeight.w600), // judul seksi
+          titleSmall: f(15, FontWeight.w600), // judul kartu
+          bodyMedium: f(14),
+          bodySmall: f(13),
+          labelSmall: f(12, FontWeight.w500), // badge, caption
+        )
+        .apply(bodyColor: cs.onSurface, displayColor: cs.onSurface);
 
     return base.copyWith(
       textTheme: text,
