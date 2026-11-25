@@ -29,8 +29,13 @@ dependencies:
   provider: ^6.1.5+1
   firebase_core: ^5.2.0
   firebase_auth: ^7.1.0
+D121241044
   cloud_firestore: ^7.2.0
+
+  google_fonts: ^9.0.0
+main
   share_plus: ^13.3.1
+  flutter_local_notifications: ^23.0.4
 
 dev_dependencies:
   flutter_test:
