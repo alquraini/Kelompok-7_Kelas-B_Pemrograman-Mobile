@@ -12,11 +12,14 @@ import 'screens/bill_detail_screen.dart';
 import 'screens/profile_screen.dart';
 import 'services/preferences_service.dart';
 
-
 void main() async {
   // Pastikan binding Flutter siap untuk fungsi async
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint('Firebase initialization skipped/failed: $e');
+  }
   runApp(const SplitBillApp());
 }
 
