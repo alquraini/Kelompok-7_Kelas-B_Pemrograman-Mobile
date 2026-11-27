@@ -5,7 +5,6 @@ import 'core/theme/app_theme.dart';
 import 'providers/app_routes.dart';
 import 'providers/auth_provider.dart';
 import 'providers/split_bill_provider.dart';
-import 'services/notification_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/create_bill_screen.dart';
