@@ -20,7 +20,7 @@ class SplitInColors extends ThemeExtension<SplitInColors> {
     mint: Color(0xFFE6F2EA),
     beige: Color(0xFFF4E8D6),
     sky: Color(0xFFE5F0FA),
-    inputFill: Color(0xFFF1F3F9),
+    inputFill: Color(0xF1F3FFF),
   );
 
   // Color Theme Dark (mint, beige, sky)
@@ -68,7 +68,7 @@ class AppTheme {
     tertiaryContainer: Color(0xFFF4E8D6),
     surface: Colors.white,
     onSurface: _charcoal,
-    surfaceContainerHighest: Color(0xFFF1F3F9),
+    surfaceContainerHighest: Color(0xF1F3FFF),
     error: Color(0xFFB91C1C),
     errorContainer: Color(0xFFFEE2E2),
   );
