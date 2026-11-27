@@ -35,7 +35,12 @@ D121241044
   google_fonts: ^9.0.0
 main
   share_plus: ^13.3.1
+D121241044
+  sqflite: ^2.4.1
+  path: ^1.9.0
+
   flutter_local_notifications: ^23.0.4
+main
 
 dev_dependencies:
   flutter_test:
