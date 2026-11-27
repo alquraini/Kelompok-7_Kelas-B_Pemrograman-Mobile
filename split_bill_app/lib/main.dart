@@ -9,15 +9,22 @@ import 'screens/home_screen.dart';
 import 'screens/create_bill_screen.dart';
 import 'screens/bill_detail_screen.dart';
 import 'screens/profile_screen.dart';
+import 'services/preferences_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const SplitBillApp());
+
+  final initialPrefs = await PreferencesService.instance.loadInitialPreferences();
+
+  runApp(
+    SplitBillApp(initialPreferences: initialPrefs),
+  );
 }
 
 class SplitBillApp extends StatelessWidget {
-  const SplitBillApp({super.key});
+  final AppInitialPreferences? initialPreferences;
+  const SplitBillApp({super.key, this.initialPreferences});
 
   @override
   Widget build(BuildContext context) {
