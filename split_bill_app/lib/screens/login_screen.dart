@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/app_routes.dart';
+import '../core/constants/app_assets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -9,10 +10,19 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Login - Split Bill')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.home),
-          child: const Text('Masuk ke Home'),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(AppAssets.logo, width: 80),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.home);
+              },
+              child: const Text('Login'),
+            ),
+          ],
+        )
       ),
     );
   }
