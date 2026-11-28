@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Color Theme Light (mint, beige, sky)
 @immutable
@@ -92,10 +91,10 @@ class AppTheme {
   static ThemeData get dark => _build(_darkScheme, SplitInColors.dark);
 
   static ThemeData _build(ColorScheme cs, SplitInColors extra) {
-    final base = ThemeData(useMaterial3: true, colorScheme: cs);
+    final base = ThemeData(useMaterial3: true, colorScheme: cs, fontFamily: 'Google Sans');
         
     TextStyle f(double size, [FontWeight w = FontWeight.w400]) =>
-    GoogleFonts.plusJakartaSans(fontSize: size, fontWeight: w);
+        TextStyle(fontFamily: 'Google Sans', fontSize: size, fontWeight: w);
 
     final text = base.textTheme
         .copyWith(
