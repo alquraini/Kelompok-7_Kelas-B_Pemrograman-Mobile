@@ -73,9 +73,14 @@ class _AuthScreenState extends State<AuthScreen> {
         );
     return InputDecoration(
       hintText: hint,
-      prefixIcon: Icon(icon, size: _iconSize),
+      prefixIcon: Padding(
+        padding: const EdgeInsetsDirectional.only(start: 16, end: 8),
+        child: Icon(icon, size: _iconSize),
+      ),
       suffixIcon: suffix,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      contentPadding: const EdgeInsetsDirectional.fromSTEB(0, 16, 20, 16),
+      prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+      errorStyle: const TextStyle(height: 1.2, fontSize: 12),
       border: pill(),
       enabledBorder: pill(),
       focusedBorder: pill(cs.secondary),
