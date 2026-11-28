@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Color Theme Light (mint, beige, sky)
 @immutable
@@ -20,7 +19,7 @@ class SplitInColors extends ThemeExtension<SplitInColors> {
     mint: Color(0xFFE6F2EA),
     beige: Color(0xFFF4E8D6),
     sky: Color(0xFFE5F0FA),
-    inputFill: Color(0xFFF1F3F9),
+    inputFill: Color(0xF1F3FFF),
   );
 
   // Color Theme Dark (mint, beige, sky)
@@ -68,7 +67,7 @@ class AppTheme {
     tertiaryContainer: Color(0xFFF4E8D6),
     surface: Colors.white,
     onSurface: _charcoal,
-    surfaceContainerHighest: Color(0xFFF1F3F9),
+    surfaceContainerHighest: Color(0xF1F3FFF),
     error: Color(0xFFB91C1C),
     errorContainer: Color(0xFFFEE2E2),
   );
@@ -92,10 +91,10 @@ class AppTheme {
   static ThemeData get dark => _build(_darkScheme, SplitInColors.dark);
 
   static ThemeData _build(ColorScheme cs, SplitInColors extra) {
-    final base = ThemeData(useMaterial3: true, colorScheme: cs);
+    final base = ThemeData(useMaterial3: true, colorScheme: cs, fontFamily: 'Google Sans');
         
     TextStyle f(double size, [FontWeight w = FontWeight.w400]) =>
-    GoogleFonts.plusJakartaSans(fontSize: size, fontWeight: w);
+        TextStyle(fontFamily: 'Google Sans', fontSize: size, fontWeight: w);
 
     final text = base.textTheme
         .copyWith(
